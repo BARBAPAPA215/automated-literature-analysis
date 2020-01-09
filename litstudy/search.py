@@ -101,11 +101,15 @@ def search_scopus(query, docs=None, retrieve_orcid=True):
                         authors.append(Author(name=author.indexed_name,
                                               orcid=authors_cache[author.auid],
                                               affiliations=author_affiliations))
-                    # else:
-                    #     authors_cache[author.auid] = AuthorRetrieval(author.auid).orcid
-                    #     authors.append(Author(name=author.indexed_name,
-                    #                           orcid=authors_cache[author.auid],
-                    #                           affiliations=author_affiliations))
+                    else:
+                        #print(author.auid)
+                        if authors_cache != {}:#Scopus404Error: The resource specified cannot be found.
+                            authors_cache[author.auid] = AuthorRetrieval(author.auid).orcid
+                            authors.append(Author(name=author.indexed_name,
+                                              orcid=authors_cache[author.auid],
+                                              affiliations=author_affiliations))
+                        else:
+                            pass
                 else:
                     authors.append(Author(name=author.indexed_name,
                                           orcid=None,
