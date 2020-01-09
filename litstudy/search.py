@@ -86,7 +86,7 @@ def search_scopus(query, docs=None, retrieve_orcid=True):
         return None
     for paper_id in tqdm(retrieved_paper_ids):
         try:
-            paper = AbstractRetrieval(paper_id, view="FULL")
+            paper = AbstractRetrieval(paper_id, view="FULL")# Scopus429Error: QUOTA EXCEEDED
         except ValueError:
             print("Impossible to retrieve data for paper \"{}\".".format(paper_id))
             return None
