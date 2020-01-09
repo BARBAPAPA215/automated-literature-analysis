@@ -101,11 +101,11 @@ def search_scopus(query, docs=None, retrieve_orcid=True):
                         authors.append(Author(name=author.indexed_name,
                                               orcid=authors_cache[author.auid],
                                               affiliations=author_affiliations))
-                    else:
-                        authors_cache[author.auid] = AuthorRetrieval(author.auid).orcid
-                        authors.append(Author(name=author.indexed_name,
-                                              orcid=authors_cache[author.auid],
-                                              affiliations=author_affiliations))
+                    # else:
+                    #     authors_cache[author.auid] = AuthorRetrieval(author.auid).orcid
+                    #     authors.append(Author(name=author.indexed_name,
+                    #                           orcid=authors_cache[author.auid],
+                    #                           affiliations=author_affiliations))
                 else:
                     authors.append(Author(name=author.indexed_name,
                                           orcid=None,
@@ -114,12 +114,12 @@ def search_scopus(query, docs=None, retrieve_orcid=True):
                     for affiliation_id in author.affiliation:
                         if affiliation_id in affiliations_cache:
                             affiliation = affiliations_cache[affiliation_id]
-                        else:
-                            affiliation = ContentAffiliationRetrieval(affiliation_id)
-                            affiliations_cache[affiliation_id] = affiliation
-                        author_affiliations.append(Affiliation(name=affiliation.affiliation_name,
-                                                               city=affiliation.city,
-                                                               country=affiliation.country))
+                    #     else:
+                    #        affiliation = ContentAffiliationRetrieval(affiliation_id)
+                    #         affiliations_cache[affiliation_id] = affiliation
+                    #     author_affiliations.append(Affiliation(name=affiliation.affiliation_name,
+                    #                                            city=affiliation.city,
+                    #                                            country=affiliation.country))
         references = []
         if paper.refcount and int(paper.refcount) > 0 and paper.references:
             for reference in paper.references:
