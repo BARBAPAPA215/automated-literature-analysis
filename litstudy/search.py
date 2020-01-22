@@ -119,8 +119,14 @@ def search_scopus(query, docs=None, retrieve_orcid=True):
                         if affiliation_id in affiliations_cache:
                             affiliation = affiliations_cache[affiliation_id]
                         else:
-                            affiliation = ContentAffiliationRetrieval(affiliation_id)
-                            affiliations_cache[affiliation_id] = affiliation
+                            if affiliation_id == '100898947':
+                                pass   
+                            else:
+                                #print(affiliation_id)
+                                affiliation = ContentAffiliationRetrieval(affiliation_id)
+                                #print(affiliation_id)
+                                #print(affiliation) 
+                                affiliations_cache[affiliation_id] = affiliation
                             author_affiliations.append(Affiliation(name=affiliation.affiliation_name,
                                                                city=affiliation.city,
                                                                country=affiliation.country))
